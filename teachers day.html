@@ -1,0 +1,1804 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>A Little Something For You</title>
+
+<style>
+
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;500;600&family=Parisienne&display=swap');
+
+:root {
+    --ivory:#f7f1e7;
+    --paper:#fffaf1;
+    --burgundy:#651f2b;
+    --gold:#b89452;
+    --brown:#3d2b25;
+}
+
+* {
+    box-sizing:border-box;
+}
+
+body {
+    margin:0;
+    background:var(--ivory);
+    color:var(--brown);
+    font-family:"Inter",sans-serif;
+    overflow-x:hidden;
+}
+
+/* MARQUEE */
+
+.marquee {
+    position:fixed;
+    left:0;
+    width:100%;
+    height:34px;
+    line-height:34px;
+    background:var(--burgundy);
+    color:#f9ead0;
+    overflow:hidden;
+    white-space:nowrap;
+    z-index:1000;
+    font-size:11px;
+    letter-spacing:2px;
+    text-transform:uppercase;
+}
+
+.marquee.top {
+    top:0;
+}
+
+.marquee.bottom {
+    bottom:0;
+}
+
+.marquee-track {
+    display:inline-block;
+    padding-left:100%;
+    animation:marquee 25s linear infinite;
+}
+
+@keyframes marquee {
+
+    from {
+        transform:translateX(0);
+    }
+
+    to {
+        transform:translateX(-100%);
+    }
+
+}
+
+/* PAGES */
+
+.page {
+    display:none;
+    min-height:100vh;
+    padding:90px 25px;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+}
+
+.page.active {
+    display:flex;
+    animation:fade .7s ease;
+}
+
+@keyframes fade {
+
+    from {
+        opacity:0;
+        transform:translateY(15px);
+    }
+
+    to {
+        opacity:1;
+        transform:none;
+    }
+
+}
+
+.container {
+    width:min(900px,100%);
+}
+
+.card {
+    background:rgba(255,250,241,.92);
+    border:1px solid rgba(184,148,82,.35);
+    border-radius:24px;
+    padding:50px 40px;
+    box-shadow:0 20px 60px rgba(61,43,37,.13);
+}
+
+h1,
+h2 {
+    font-family:"Cormorant Garamond",Georgia,serif;
+    color:var(--burgundy);
+}
+
+h1 {
+    font-size:clamp(50px,9vw,90px);
+}
+
+h2 {
+    font-size:clamp(40px,7vw,65px);
+}
+
+p {
+    line-height:1.8;
+}
+
+.script {
+    font-family:"Parisienne",cursive;
+    color:var(--gold);
+    font-size:32px;
+}
+
+.eyebrow {
+    color:var(--gold);
+    text-transform:uppercase;
+    letter-spacing:4px;
+    font-size:11px;
+}
+
+.quote {
+    font-family:"Cormorant Garamond",Georgia,serif;
+    font-size:23px;
+    line-height:1.6;
+}
+
+/* BUTTONS */
+
+.btn {
+    border:none;
+    border-radius:999px;
+    background:var(--burgundy);
+    color:white;
+    padding:14px 26px;
+    margin:10px 5px;
+    cursor:pointer;
+    font-weight:600;
+    transition:.25s;
+}
+
+.btn:hover {
+    transform:translateY(-3px);
+}
+
+.btn.gold {
+    background:var(--gold);
+}
+
+.btn.outline {
+    background:transparent;
+    color:var(--burgundy);
+    border:1px solid var(--gold);
+}
+
+/* INPUT */
+
+.input {
+    width:min(500px,100%);
+    padding:16px;
+    border-radius:14px;
+    border:1px solid rgba(101,31,43,.25);
+    background:white;
+    text-align:center;
+    margin:15px auto;
+    display:block;
+}
+
+/* REMOVE NUMBER INPUT ARROWS */
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance:none;
+    margin:0;
+}
+
+input[type="number"] {
+    -moz-appearance:textfield;
+    appearance:textfield;
+}
+
+/* OPTIONS */
+
+.options {
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:13px;
+    max-width:720px;
+    margin:25px auto;
+}
+
+.option {
+    border:1px solid rgba(101,31,43,.18);
+    background:white;
+    border-radius:16px;
+    padding:18px;
+    text-align:left;
+    cursor:pointer;
+    transition:.25s;
+    font-family:"Inter",sans-serif;
+    font-size:15px;
+    color:var(--brown);
+}
+
+.option:hover {
+    transform:translateY(-2px);
+    border-color:var(--gold);
+}
+
+.option.selected {
+    background:var(--burgundy);
+    color:white;
+    border-color:var(--burgundy);
+}
+
+.reaction {
+    min-height:45px;
+    font-family:"Cormorant Garamond",serif;
+    font-size:23px;
+    color:var(--burgundy);
+}
+
+/* GAME */
+
+.progress {
+    height:5px;
+    background:rgba(101,31,43,.1);
+    border-radius:20px;
+    overflow:hidden;
+    max-width:600px;
+    margin:25px auto;
+}
+
+.progress span {
+    display:block;
+    height:100%;
+    width:0;
+    background:var(--gold);
+}
+
+/* LETTER */
+
+.letter {
+    background:#fffdf7;
+    max-width:760px;
+    margin:auto;
+    padding:45px;
+    text-align:left;
+    border:1px solid rgba(184,148,82,.4);
+    box-shadow:0 20px 50px rgba(61,43,37,.12);
+}
+
+.letter p {
+    font-family:"Cormorant Garamond",serif;
+    font-size:23px;
+}
+
+/* MEMORY */
+
+.memory-card {
+    max-width:700px;
+    margin:30px auto;
+    padding:50px 35px;
+    background:#fffdf7;
+    border:1px solid rgba(184,148,82,.4);
+    box-shadow:0 20px 50px rgba(61,43,37,.12);
+}
+
+.memory-symbol {
+    font-size:70px;
+    margin-bottom:20px;
+}
+
+/* FINAL */
+
+.final-lines p {
+    font-family:"Cormorant Garamond",serif;
+    font-size:32px;
+}
+
+/* PETALS */
+
+.petal {
+    position:fixed;
+    top:-20px;
+    color:rgba(184,148,82,.35);
+    animation:fall linear infinite;
+    pointer-events:none;
+    z-index:1;
+}
+
+@keyframes fall {
+
+    to {
+        transform:translateY(110vh) rotate(360deg);
+    }
+
+}
+
+.hidden {
+    display:none!important;
+}
+
+/* MOBILE */
+
+@media(max-width:650px) {
+
+    .page {
+        padding:75px 15px;
+    }
+
+    .card {
+        padding:35px 20px;
+    }
+
+    .options {
+        grid-template-columns:1fr;
+    }
+
+    .letter {
+        padding:25px;
+    }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="marquee top">
+    <div id="topMarquee" class="marquee-track"></div>
+</div>
+
+<div class="marquee bottom">
+    <div id="bottomMarquee" class="marquee-track"></div>
+</div>
+
+
+<!-- 0 -->
+
+<section class="page active" id="page0">
+
+<div class="container">
+
+<div class="script">
+For someone who makes a difference…
+</div>
+
+<h1>
+A Little<br>
+Something For You
+</h1>
+
+<p class="quote">
+This isn't homework.<br>
+This isn't a test.<br>
+And for once… you don't have to grade anything. 😭
+</p>
+
+<button class="btn gold" onclick="goTo(1)">
+✨ Begin the Surprise
+</button>
+
+</div>
+
+</section>
+
+
+<!-- 1 -->
+
+<section class="page" id="page1">
+
+<div class="container card">
+
+<div class="eyebrow">
+Before we begin
+</div>
+
+<h2>
+Every surprise has a story.
+</h2>
+
+<p class="quote">
+But before yours begins, I need to know a little about the person receiving it.
+</p>
+
+<button class="btn" onclick="goTo(2)">
+Let's Begin →
+</button>
+
+</div>
+
+</section>
+
+
+<!-- 2 -->
+
+<section class="page" id="page2">
+
+<div class="container card">
+
+<div class="eyebrow">
+01 / 03
+</div>
+
+<h2>
+First things first…
+</h2>
+
+<p>
+What should I call you?
+</p>
+
+<input
+class="input"
+id="teacherName"
+placeholder="Enter your name"
+>
+
+<button class="btn" onclick="saveName()">
+Continue →
+</button>
+
+</div>
+
+</section>
+
+
+<!-- 3 -->
+
+<section class="page" id="page3">
+
+<div class="container card">
+
+<div class="eyebrow">
+02 / 03
+</div>
+
+<h2>
+A little personal… 👀
+</h2>
+
+<p>
+How old are you?
+</p>
+
+<input
+class="input"
+id="teacherAge"
+type="number"
+placeholder="Enter your age"
+>
+
+<button class="btn" onclick="saveAge()">
+Continue →
+</button>
+
+</div>
+
+</section>
+
+
+<!-- 4 -->
+
+<section class="page" id="page4">
+
+<div class="container card">
+
+<div class="eyebrow">
+03 / 03
+</div>
+
+<h2>
+And one last thing…
+</h2>
+
+<p>
+What year did you join our school?
+</p>
+
+<input
+class="input"
+id="joiningYear"
+type="number"
+placeholder="Enter year"
+>
+
+<button class="btn" onclick="saveYear()">
+Continue →
+</button>
+
+</div>
+
+</section>
+
+
+<!-- OLDER TEACHERS -->
+
+<section class="page" id="page5">
+
+<div class="container card">
+
+<div class="eyebrow">
+Since you've been here for a while…
+</div>
+
+<h2>
+Wait…
+</h2>
+
+<p class="quote">
+You might remember something.
+</p>
+
+<button class="btn" onclick="goTo(6)">
+Continue →
+</button>
+
+</div>
+
+</section>
+
+
+<section class="page" id="page6">
+
+<div class="container card">
+
+<div class="eyebrow">
+A little callback 👀
+</div>
+
+<h2>
+Be honest…
+</h2>
+
+<p class="quote">
+Did you expect another extraordinary gift like the QR code I gave you last time… and now this webpage?
+</p>
+
+<div class="options">
+
+<button class="option"
+onclick="branchAnswer(this,'So you were expecting me to surprise you again? Interesting… 👀','branch1')">
+YES
+</button>
+
+<button class="option"
+onclick="branchAnswer(this,'Well… I suppose that makes this surprise a little more surprising.','branch1')">
+NO
+</button>
+
+</div>
+
+<div id="branch1" class="reaction"></div>
+
+<button id="next1" class="btn hidden" onclick="goTo(7)">
+Next →
+</button>
+
+</div>
+
+</section>
+
+
+<section class="page" id="page7">
+
+<div class="container card">
+
+<div class="eyebrow">
+One more honest question
+</div>
+
+<h2>
+Be honest…
+</h2>
+
+<p class="quote">
+Do you think I lie most of the time and give false complaints about other students, even though they are the top students?
+</p>
+
+<div class="options">
+
+<button class="option"
+onclick="branchAnswer(this,'That is an absolute honesty. 😂','branch2')">
+YES, EVERY TIME
+</button>
+
+<button class="option"
+onclick="branchAnswer(this,'Excellent. We can continue.','branch2')">
+NO
+</button>
+
+</div>
+
+<div id="branch2" class="reaction"></div>
+
+<button id="next2" class="btn hidden" onclick="goTo(9)">
+Continue →
+</button>
+
+</div>
+
+</section>
+
+
+<!-- NEW TEACHERS -->
+
+<section class="page" id="page8">
+
+<div class="container card">
+
+<div class="eyebrow">
+A different question for you…
+</div>
+
+<h2>
+Since you're one of the newer members of our school…
+</h2>
+
+<p class="quote">
+I'm curious about something.
+</p>
+
+<button class="btn" onclick="goTo(9)">
+I'm Curious Too →
+</button>
+
+</div>
+
+</section>
+
+
+<section class="page" id="page9">
+
+<div class="container card">
+
+<div class="eyebrow">
+A question for our newer teachers
+</div>
+
+<h2>
+Did you ever expect a student to give you this kind of gift?
+</h2>
+
+<div class="options">
+
+<button class="option"
+onclick="newTeacherAnswer(this,'I had a feeling you might say yes.')">
+YES
+</button>
+
+<button class="option"
+onclick="newTeacherAnswer(this,'Well… now you have one. 🌷')">
+NO
+</button>
+
+<button class="option"
+onclick="newTeacherAnswer(this,'Then I hope this one is still a little special.')">
+I GET THIS KIND OF GIFTS
+</button>
+
+<button class="option"
+onclick="newTeacherAnswer(this,'Well… perhaps today changes that. 🌷')">
+NEVER
+</button>
+
+</div>
+
+<div id="newReaction" class="reaction"></div>
+
+<button id="newNext" class="btn hidden" onclick="goTo(9.5)">
+Continue →
+</button>
+
+</div>
+
+</section>
+
+
+<!-- UNLOCK -->
+
+<section class="page" id="page9.5">
+
+<div class="container card">
+
+<div class="eyebrow">
+Questions complete
+</div>
+
+<h2>
+That's enough questions.
+</h2>
+
+<p class="quote">
+You've survived the interrogation. 😂
+<br><br>
+But you haven't unlocked the actual surprise yet.
+</p>
+
+<button class="btn gold" onclick="goTo(10)">
+🔓 Unlock
+</button>
+
+</div>
+
+</section>
+
+
+<section class="page" id="page10">
+
+<div class="container">
+
+<div class="eyebrow">
+Preparing your surprise…
+</div>
+
+<h2>
+Almost there…
+</h2>
+
+<p class="quote">
+Something special is being prepared.
+</p>
+
+<div class="progress">
+<span style="width:100%"></span>
+</div>
+
+<h2>
+ACCESS GRANTED 🔓
+</h2>
+
+<p class="quote">
+Welcome to the actual surprise.
+</p>
+
+<button class="btn" onclick="goTo(11)">
+Continue →
+</button>
+
+</div>
+
+</section>
+
+
+<!-- GAME INTRO -->
+
+<section class="page" id="page11">
+
+<div class="container card">
+
+<div class="eyebrow">
+Teacher's Day Challenge
+</div>
+
+<h2>
+How Well Do You Know Your Classroom?
+</h2>
+
+<p class="quote">
+You've answered a few questions about yourself…
+<br>
+Now let's see what you remember about the classroom.
+</p>
+
+<button class="btn" onclick="startGame()">
+🎮 Start the Game →
+</button>
+
+</div>
+
+</section>
+
+
+<!-- GAME -->
+
+<section class="page" id="page12">
+
+<div class="container card">
+
+<div class="eyebrow" id="gameNumber">
+Question 1
+</div>
+
+<h2 id="gameQuestion"></h2>
+
+<div id="gameOptions" class="options"></div>
+
+<div id="gameReaction" class="reaction"></div>
+
+<button
+id="gameNext"
+class="btn hidden"
+onclick="nextGame()"
+>
+Next Question →
+</button>
+
+<div class="progress">
+<span id="gameProgress"></span>
+</div>
+
+</div>
+
+</section>
+
+
+<!-- JOKE -->
+
+<section class="page" id="page13">
+
+<div class="container card">
+
+<div class="eyebrow">
+One little joke before we continue
+</div>
+
+<h2>
+WAIT…
+</h2>
+
+<p class="quote">
+Those weren't exactly the options you were expecting, were they? 😂
+</p>
+
+<p>
+Don't worry. The next ones make a little more sense.
+</p>
+
+<button class="btn" onclick="continueAfterJoke()">
+I'm Ready →
+</button>
+
+</div>
+
+</section>
+
+
+<!-- MEMORY -->
+
+<section class="page" id="page14">
+
+<div class="container card">
+
+<div class="eyebrow">
+Final Question
+</div>
+
+<h2>
+What do teachers remember?
+</h2>
+
+<div class="options">
+
+<button class="option" onclick="memoryAnswer(this)">
+The students
+</button>
+
+<button class="option" onclick="memoryAnswer(this)">
+Classroom moments
+</button>
+
+<button class="option" onclick="memoryAnswer(this)">
+Funny incidents
+</button>
+
+<button class="option" onclick="memoryAnswer(this)">
+Difficult days
+</button>
+
+<button
+class="option"
+style="grid-column:1/-1"
+onclick="memoryAnswer(this)"
+>
+All of the above ❤️
+</button>
+
+</div>
+
+<div id="memoryReaction" class="reaction"></div>
+
+<button
+id="memoryNext"
+class="btn hidden"
+onclick="goTo(15)"
+>
+Find Out Why →
+</button>
+
+</div>
+
+</section>
+
+
+<!-- TRANSITION -->
+
+<section class="page" id="page15">
+
+<div class="container card">
+
+<div class="eyebrow">
+The game is over…
+</div>
+
+<h2>
+You Know What?
+</h2>
+
+<p class="quote">
+The game was fun…
+</p>
+
+<p>
+But that wasn't actually the reason I wanted you to play it.
+</p>
+
+<button class="btn" onclick="goTo(16)">
+Continue →
+</button>
+
+</div>
+
+</section>
+
+
+<!-- LETTER -->
+
+<section class="page" id="page16">
+
+<div class="container">
+
+<div class="eyebrow">
+A few things we don't say enough
+</div>
+
+<h2>
+Things We Don't Say Enough
+</h2>
+
+<div class="letter">
+
+<p id="letterText"></p>
+
+</div>
+
+<button
+id="letterNext"
+class="btn"
+onclick="nextLetter()"
+>
+Next →
+</button>
+
+</div>
+
+</section>
+
+
+<!-- MEMORY WITHOUT PHOTO -->
+
+<section class="page" id="page17">
+
+<div class="container">
+
+<div class="eyebrow">
+A memory worth keeping
+</div>
+
+<h2>
+One More Thing…
+</h2>
+
+<div class="memory-card">
+
+<div class="memory-symbol">
+🌷
+</div>
+
+<p class="quote">
+Some moments become memories before we even realize they're happening.
+</p>
+
+<p>
+And some teachers become part of our memories simply by being there —
+teaching, encouraging, correcting, laughing, and helping us grow.
+</p>
+
+<p>
+Years from now, we may not remember every lesson perfectly, but we will remember the people who made those lessons meaningful.
+</p>
+
+<div class="script">
+Some memories deserve to be remembered.
+</div>
+
+</div>
+
+<button class="btn" onclick="goTo(18)">
+Continue →
+</button>
+
+</div>
+
+</section>
+
+
+<!-- FINAL BUILD -->
+
+<section class="page" id="page18">
+
+<div class="container final-lines">
+
+<div class="eyebrow">
+And finally…
+</div>
+
+<h2>
+A Teacher's Impact
+</h2>
+
+<p>You teach us subjects.</p>
+
+<p>You teach us discipline.</p>
+
+<p>You teach us patience.</p>
+
+<p>You teach us to keep trying.</p>
+
+<br>
+
+<p>
+<b>
+And sometimes, without even realizing it…
+</b>
+</p>
+
+<h2>
+you teach us how to become better people.
+</h2>
+
+<button class="btn" onclick="goTo(19)">
+Continue →
+</button>
+
+</div>
+
+</section>
+
+
+<!-- END -->
+
+<section class="page" id="page19">
+
+<div class="container card">
+
+<div class="script">
+With gratitude
+</div>
+
+<h2>
+Happy Teacher's Day ❤️
+</h2>
+
+<p class="quote">
+Thank you for every lesson, every correction,
+every moment of patience, every encouragement,
+and every little thing you probably didn't realize mattered.
+</p>
+
+<p class="quote">
+<b>
+This may only be a webpage…
+<br>
+but the gratitude behind it is very real.
+</b>
+</p>
+
+<p class="script">
+Your Student 🌷
+<br>
+Kalyani Bhardwaj
+</p>
+
+<button class="btn gold" onclick="goTo(20)">
+One Last Thing…
+</button>
+
+</div>
+
+</section>
+
+
+<!-- SECRET -->
+
+<section class="page" id="page20">
+
+<div class="container card">
+
+<div class="eyebrow">
+Secret Ending
+</div>
+
+<h2>
+Did you really think that was everything?
+</h2>
+
+<div class="options">
+
+<button class="option" onclick="goTo(21)">
+YES
+</button>
+
+<button class="option" onclick="goTo(21)">
+NO
+</button>
+
+</div>
+
+</div>
+
+</section>
+
+
+<section class="page" id="page21">
+
+<div class="container">
+
+<div class="script">
+One final message…
+</div>
+
+<h1>
+Thank You
+</h1>
+
+<p class="quote">
+Thank you for being part of my school journey. ❤️
+</p>
+
+<div style="font-size:50px">
+🌷
+</div>
+
+<h2>
+For the Teachers Who Make a Difference
+</h2>
+
+<p class="quote">
+<b>
+Happy Teacher's Day.
+</b>
+</p>
+
+<p class="script">
+Your Student,
+<br>
+Kalyani Bhardwaj
+</p>
+
+<button class="btn outline" onclick="restart()">
+↺ Experience It Again
+</button>
+
+</div>
+
+</section>
+
+
+<script>
+
+const marqueeMessages = [
+
+"HAPPY TEACHER'S DAY ✦ A LITTLE SURPRISE FOR YOU ✦ PLEASE DON'T GRADE THIS ONE ✦",
+
+"BEFORE THE SURPRISE BEGINS ✦ JUST A FEW LITTLE QUESTIONS ✦ NO WRONG ANSWERS ✦ PROBABLY 👀 ✦",
+
+"STEP ONE ✦ LET'S START WITH THE BASICS ✦ WHO ARE YOU, TEACHER? ✦",
+
+"STEP TWO ✦ A LITTLE PERSONAL 👀 ✦ DON'T WORRY, IT'S SECRET ✦",
+
+"STEP THREE ✦ ONE LAST DETAIL ✦ THEN THE REAL SURPRISE BEGINS ✦",
+
+"YOU'VE BEEN HERE FOR A WHILE ✦ SO YOU MIGHT REMEMBER THIS ✦",
+
+"REMEMBER THAT QR CODE? 👀 ✦ DID YOU THINK THERE WOULD BE ANOTHER SURPRISE? ✦",
+
+"TIME FOR SOME HONESTY ✦ THAT'S AN ABSOLUTE HONESTY ✦",
+
+"NEW TEACHER ALERT ✦ YOU'RE STILL GETTING TO KNOW US ✦",
+
+"HAVE YOU EVER RECEIVED A SURPRISE LIKE THIS? ✦ BE HONEST ✦",
+
+"UNLOCKING YOUR SURPRISE ✦ PLEASE WAIT ✦ SOMETHING SPECIAL IS LOADING ✦",
+
+"WELCOME TO THE TEACHER'S DAY CHALLENGE ✦ NO CHEATING ✦ NO STUDENT HELP ✦ GOOD LUCK! 🌷 ✦",
+
+"QUESTION 01 ✦ THINK CAREFULLY ✦ YOUR CLASSROOM IS WATCHING 👀 ✦",
+
+"OKAY, THAT WAS A LITTLE UNFAIR 😂 ✦ DON'T WORRY ✦ IT GETS BETTER ✦",
+
+"FINAL QUESTION ✦ THIS ONE IS DIFFERENT ✦ TAKE YOUR TIME ✦",
+
+"THE GAME IS OVER ✦ BUT THE SURPRISE ISN'T ✦ SOMETHING MORE PERSONAL IS WAITING ✦",
+
+"SOME THINGS ARE EASIER TO WRITE THAN TO SAY ✦ WITH GRATITUDE ✦",
+
+"MEMORIES ✦ MOMENTS ✦ PEOPLE ✦ THE LITTLE THINGS THAT STAY ✦",
+
+"ALMOST THERE ✦ ONE LAST MESSAGE ✦ FROM THE HEART ✦",
+
+"THANK YOU ✦ FOR EVERY LESSON ✦ EVERY MOMENT ✦ EVERY MEMORY ✦ HAPPY TEACHER'S DAY ❤️ ✦",
+
+"WAIT… ✦ DON'T LEAVE YET ✦ THERE'S ONE LAST LITTLE SURPRISE ✦ 👀 ✦",
+
+"HAPPY TEACHER'S DAY ✦ WITH GRATITUDE ✦ ALWAYS REMEMBERED ✦ 🌷 ✦"
+
+];
+
+
+let currentPage = 0;
+
+let teacherName = "";
+let teacherAge = "";
+let joiningYear = "";
+
+
+function updateMarquee(index) {
+
+    const message =
+        marqueeMessages[
+            Math.min(index, marqueeMessages.length - 1)
+        ];
+
+    document.getElementById("topMarquee")
+        .textContent =
+        "✦ " + message + " ✦ " + message;
+
+    document.getElementById("bottomMarquee")
+        .textContent =
+        "✦ " + message + " ✦ " + message;
+}
+
+
+function goTo(page) {
+
+    document
+        .getElementById("page" + currentPage)
+        .classList.remove("active");
+
+    currentPage = page;
+
+    document
+        .getElementById("page" + currentPage)
+        .classList.add("active");
+
+    updateMarquee(currentPage);
+
+    window.scrollTo({
+        top:0,
+        behavior:"smooth"
+    });
+}
+
+
+/* TEACHER DATA */
+
+function saveName() {
+
+    const value =
+        document.getElementById("teacherName")
+        .value.trim();
+
+    if (!value) {
+
+        alert("Please enter your name first.");
+
+        return;
+    }
+
+    teacherName = value;
+
+    goTo(3);
+}
+
+
+function saveAge() {
+
+    const value =
+        document.getElementById("teacherAge")
+        .value.trim();
+
+    if (!value) {
+
+        alert("Please enter your age first.");
+
+        return;
+    }
+
+    teacherAge = value;
+
+    goTo(4);
+}
+
+
+function saveYear() {
+
+    const year =
+        parseInt(
+            document.getElementById("joiningYear")
+            .value
+        );
+
+    if (!year || year < 1900 || year > 2100) {
+
+        alert("Please enter a valid joining year.");
+
+        return;
+    }
+
+    joiningYear = year;
+
+    if (year <= 2025) {
+
+        goTo(5);
+
+    } else {
+
+        goTo(8);
+
+    }
+}
+
+
+/* BRANCH */
+
+function branchAnswer(
+    button,
+    message,
+    id
+) {
+
+    button.parentElement
+        .querySelectorAll(".option")
+        .forEach(function(btn) {
+
+            btn.classList.remove("selected");
+
+        });
+
+    button.classList.add("selected");
+
+    document.getElementById(id)
+        .textContent = message;
+
+    if (id === "branch1") {
+
+        document.getElementById("next1")
+            .classList.remove("hidden");
+
+    } else {
+
+        document.getElementById("next2")
+            .classList.remove("hidden");
+
+    }
+}
+
+
+function newTeacherAnswer(
+    button,
+    message
+) {
+
+    button.parentElement
+        .querySelectorAll(".option")
+        .forEach(function(btn) {
+
+            btn.classList.remove("selected");
+
+        });
+
+    button.classList.add("selected");
+
+    document.getElementById("newReaction")
+        .textContent = message;
+
+    document.getElementById("newNext")
+        .classList.remove("hidden");
+}
+
+
+/* GAME */
+
+const questions = [
+
+{
+
+question:
+"What disappears fastest in a classroom?",
+
+options:[
+"A) Homework",
+"B) Marker / Red pen",
+"C) The teacher's patience 😭",
+"D) Attendance"
+],
+
+reaction:
+"Interesting choice… 👀"
+
+},
+
+{
+
+question:
+"What is the most commonly heard sentence before an exam ends?",
+
+options:[
+"A) \"Ma'am/Sir, just five minutes!\"",
+"B) \"I haven't finished yet!\"",
+"C) \"Can I have one more minute?\"",
+"D) All of the above"
+],
+
+reaction:
+"That sounds suspiciously familiar… 👀"
+
+},
+
+{
+
+question:
+"Which classroom moment is most likely to make a teacher look at the clock?",
+
+options:[
+"A) A sudden wave of questions",
+"B) Everyone packing up early",
+"C) The last five minutes before the bell",
+"D) All of the above"
+],
+
+reaction:
+"That sounds suspiciously familiar…"
+
+},
+
+{
+
+question:
+"What do students suddenly remember when the teacher says, “Time's up”?",
+
+options:[
+"A) Their answers",
+"B) Their unfinished work",
+"C) That one question they forgot",
+"D) Everything at once 😭"
+],
+
+reaction:
+"The timing is always remarkable."
+
+},
+
+{
+
+question:
+"Which classroom sound can a teacher recognize instantly?",
+
+options:[
+"A) A dropped pen",
+"B) Whispering",
+"C) A chair moving",
+"D) The class suddenly becoming silent 👀"
+],
+
+reaction:
+"That last one is powerful evidence."
+
+}
+
+];
+
+
+let gameIndex = 0;
+let answered = false;
+
+
+function startGame() {
+
+    gameIndex = 0;
+
+    goTo(12);
+
+    loadGame();
+
+}
+
+
+function loadGame() {
+
+    answered = false;
+
+    const q = questions[gameIndex];
+
+    document.getElementById("gameNumber")
+        .textContent =
+        "Question " +
+        (gameIndex + 1) +
+        " / " +
+        questions.length;
+
+    document.getElementById("gameQuestion")
+        .textContent =
+        q.question;
+
+    const area =
+        document.getElementById("gameOptions");
+
+    area.innerHTML = "";
+
+    q.options.forEach(function(optionText) {
+
+        const button =
+            document.createElement("button");
+
+        button.className = "option";
+
+        button.textContent = optionText;
+
+        button.onclick = function() {
+
+            /*
+            The answer can be changed.
+            Clicking another option removes
+            the previous selection.
+            */
+
+            area.querySelectorAll(".option")
+                .forEach(function(btn) {
+
+                    btn.classList.remove("selected");
+
+                });
+
+            button.classList.add("selected");
+
+            document.getElementById("gameReaction")
+                .textContent =
+                q.reaction;
+
+            document.getElementById("gameNext")
+                .classList.remove("hidden");
+
+        };
+
+        area.appendChild(button);
+
+    });
+
+    document.getElementById("gameReaction")
+        .textContent = "";
+
+    document.getElementById("gameNext")
+        .classList.add("hidden");
+
+    document.getElementById("gameProgress")
+        .style.width =
+        ((gameIndex + 1) /
+        questions.length * 100) + "%";
+}
+
+
+function nextGame() {
+
+    if (gameIndex === 1) {
+
+        goTo(13);
+
+        return;
+
+    }
+
+    if (gameIndex < questions.length - 1) {
+
+        gameIndex++;
+
+        loadGame();
+
+    } else {
+
+        goTo(14);
+
+    }
+
+}
+
+
+function continueAfterJoke() {
+
+    gameIndex = 2;
+
+    goTo(12);
+
+    loadGame();
+
+}
+
+
+/* MEMORY */
+
+function memoryAnswer(button) {
+
+    button.parentElement
+        .querySelectorAll(".option")
+        .forEach(function(btn) {
+
+            btn.classList.remove("selected");
+
+        });
+
+    button.classList.add("selected");
+
+    document.getElementById("memoryReaction")
+        .textContent =
+        "There isn't really one correct answer. ❤️";
+
+    document.getElementById("memoryNext")
+        .classList.remove("hidden");
+}
+
+
+/* LETTER */
+
+const letters = [
+
+"A teacher doesn't always know which lesson will stay with a student.",
+
+"Sometimes it isn't the chapter, formula, or answer written on the board.",
+
+"Sometimes it's the encouragement given on a difficult day…",
+
+"The patience when we didn't understand.",
+
+"The belief that we could do better.",
+
+"A teacher can leave behind something much bigger than a lesson: a little confidence, a little courage, and a reminder that someone believed we could become better than we were yesterday.",
+
+"So today, this isn't just a “Happy Teacher's Day.” It's a small thank-you for all the ordinary moments that meant more than they seemed to at the time.",
+
+"Thank you for teaching us — and for leaving a little part of your wisdom behind wherever we go. ❤️"
+
+];
+
+let letterIndex = 0;
+
+
+function nextLetter() {
+
+    letterIndex++;
+
+    if (letterIndex >= letters.length) {
+
+        goTo(17);
+
+        return;
+
+    }
+
+    document.getElementById("letterText")
+        .textContent =
+        letters[letterIndex];
+
+    if (
+        letterIndex ===
+        letters.length - 1
+    ) {
+
+        document.getElementById("letterNext")
+            .textContent =
+            "Continue →";
+
+    }
+
+}
+
+
+/* RESTART */
+
+function restart() {
+
+    letterIndex = 0;
+
+    document.getElementById("letterText")
+        .textContent =
+        letters[0];
+
+    document.getElementById("teacherName")
+        .value = "";
+
+    document.getElementById("teacherAge")
+        .value = "";
+
+    document.getElementById("joiningYear")
+        .value = "";
+
+    teacherName = "";
+    teacherAge = "";
+    joiningYear = "";
+
+    goTo(0);
+
+}
+
+
+/* PETALS */
+
+function petals() {
+
+    for (
+        let i = 0;
+        i < 18;
+        i++
+    ) {
+
+        const petal =
+            document.createElement("div");
+
+        petal.className = "petal";
+
+        petal.textContent =
+            ["✦","✧","❀","·"]
+            [
+                Math.floor(
+                    Math.random()*4
+                )
+            ];
+
+        petal.style.left =
+            Math.random()*100 + "vw";
+
+        petal.style.animationDuration =
+            7 + Math.random()*9 + "s";
+
+        petal.style.animationDelay =
+            -Math.random()*12 + "s";
+
+        document.body.appendChild(petal);
+
+    }
+
+}
+
+
+/* START */
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function() {
+
+        updateMarquee(0);
+
+        petals();
+
+        document.getElementById("letterText")
+            .textContent =
+            letters[0];
+
+    }
+);
+
+</script>
+
+</body>
+</html>
